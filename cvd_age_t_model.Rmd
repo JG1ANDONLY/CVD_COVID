@@ -1,0 +1,101 @@
+---
+title: "cvd_age_t_model"
+author: "Sarah Zhang"
+date: '2022-09-07'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Notes: crude rate = death count / population * 100000
+
+Import data: monthly CVD deaths by sex in 2018, 2019, and 2020 
+```{r}
+cvd_age = read.csv("cvd_age_cleaned.csv")
+```
+
+Regroup age groups 
+```{r}
+ageGroup = lm(crude_rate ~ age_group , data = cvd_age)
+summary(ageGroup)
+```
+**Answer:** Based on p-values, regrouping the age group into three groups: 05-44, 45-64, 65+. Data is re-cleaned in python to file cvd_age_regrouped
+
+
+```{r}
+cvdAgeRegroup = read.csv('cvd_age_regrouped.csv')
+```
+
+a. Add time indicator by month
+```{r}
+cvdAgeRegroup = transform(cvdAgeRegroup, month_code = substr(month,1,2))
+```
+
+```{r}
+age_month_model = lm(crude_rate ~ age_group*month_code, data = cvdAgeRegroup)
+summary(age_month_model)
+```
+
+**Analysis: **
+
+b. Add time indicator on COVID:  
+        - '0 represents period before COVID
+        - '1' represents period after COVID
+```{r}
+cvdAgeRegroup$covid = ifelse(grepl('20', cvdAgeRegroup$month)== TRUE, 1, 0)
+```
+
+c. Generate modeling results
+```{r}
+age_covid_model = lm(crude_rate ~ age_group*covid, data = cvdAgeRegroup)
+summary(age_covid_model)
+```
+**Analysis:**
+
+
+b. Add time indicator on seasonality.
+According to 50 line plot of crude rate by states and sex_month_model result, CVD death rate reach to a **high level** every year between **November and April next year**; and CVD death rate reach to a **low point** every year between **May to October**. In order to further test significance of seasonality on CVD crude rate, we add a time indicator of 'season' based on months with high and low crude rate. 
+  -- 'high' represents months with high crude rate 
+  -- 'low' represents months with low crude rate 
+```{r}
+cvdAgeRegroup$month_code = as.numeric(cvdAgeRegroup$month_code)
+```
+  
+```{r}
+cvdAgeRegroup = transform(cvdAgeRegroup, 
+                          season= ifelse(month_code %in% c(5:10),'low', 'high'))
+```
+  
+```{r}
+cvdAgeRegroup$month_code = as.character(cvdAgeRegroup$month_code)
+```
+
+c. Generate Modeling result
+```{r}
+age_season_model = lm(crude_rate ~ age_group*season, data = cvdAgeRegroup)
+summary(age_season_model)
+```
+**Analysis:**
+
+b. Add a time indicator by year (2018, 2019, 2020)
+```{r}
+cvdAgeRegroup = transform(cvdAgeRegroup, year_code = substr(month,6,7))
+```
+
+c. Generate modeling result
+```{r}
+age_year_model = lm(crude_rate ~ age_group*year_code, data = cvdAgeRegroup)
+summary(age_year_model)
+```
+
+d. Build a full model with gender and all time indicators 
+```{r}
+age_time_model = lm(crude_rate ~ age_group + covid + year_code + season + month_code , data = cvdAgeRegroup)
+summary(age_time_model)
+```
+
+
+```{r}
+age_time_step.both = step(age_time_model, direction='both')
+summary(age_time_step.both)
+```

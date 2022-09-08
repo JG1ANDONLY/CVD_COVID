@@ -1,0 +1,105 @@
+---
+title: "cvd_sex_t_model"
+author: "Sarah Zhang"
+date: '2022-07-11'
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r}
+library("ggplot2")
+library(MASS)
+```
+
+## R Markdown
+
+Notes: crude rate = death count / population * 100000
+
+1. Testing significance of factors 'sex' and 'time_indicators' to CVD crude rate. 
+
+a. Import data: monthly CVD deaths by sex in 2018, 2019, and 2020 
+```{r}
+cvdSex = read.csv("cvd_sex_cleaned.csv")
+```
+
+a. Add time indicator by month
+```{r}
+cvdSex = transform(cvdSex, month_code = substr(month,1,2))
+```
+
+b. Generate modeling result
+```{r}
+sex_month_model = lm(crude_rate ~ gender*month_code, data = cvdSex)
+summary(sex_month_model)
+```
+**Analysis: **
+
+
+
+b. Add time indicator on COVID:  
+        - '0 represents period before COVID
+        - '1' represents period after COVID
+```{r}
+cvdSex$covid = ifelse(grepl('20', cvdSex$month)== TRUE, 1, 0)
+```
+
+c. Generate modeling results
+```{r}
+sex_covid_model = lm(crude_rate ~ gender*covid, data = cvdSex)
+summary(sex_covid_model)
+```
+
+**Analysis: **
+
+
+
+b. Add time indicator on seasonality.
+According to 50 line plot of crude rate by states and sex_month_model result, CVD death rate reach to a high level every year between November and April next year; and CVD death rate reach to a low point every year between May to October. In order to further test significance of seasonality on CVD crude rate, we add a time indicator of 'season' based on months with high and low crude rate. 
+  -- 'high' represents months with high crude rate 
+  -- 'low' represents months with low crude rate 
+```{r}
+cvdSex$month_code = as.numeric(cvdSex$month_code)
+```
+  
+```{r}
+cvdSex = transform(cvdSex, 
+                  season= ifelse(month_code %in% c(5:10),'low', 'high'))
+```
+
+```{r}
+cvdSex$month_code = as.character(cvdSex$month_code)
+```
+
+c. Generate Modeling result
+```{r}
+sex_season_model = lm(crude_rate ~ gender*season, data = cvdSex)
+summary(sex_season_model)
+```
+
+**Analysis:**
+
+
+b. Add a time indicator by year (2018, 2019, 2020)
+```{r}
+cvdSex = transform(cvdSex, year_code = substr(month,6,7))
+```
+
+c. Generate modeling result
+```{r}
+sex_year_model = lm(crude_rate ~ gender*year_code, data = cvdSex)
+summary(sex_year_model)
+```
+
+d. Build a full model with gender and all time indicators 
+```{r}
+sex_time_model = lm(crude_rate ~ gender + covid + year_code + season + month_code , data = cvdSex)
+summary(sex_time_model)
+```
+```{r}
+sex_time_step.both = step(sex_time_model, direction='both')
+summary(sex_time_step.both)
+```
+
+
