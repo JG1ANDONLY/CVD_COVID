@@ -1,10 +1,8 @@
 ---
-title: "cvd_age_t_model"
+title: "cvd_gender"
 author: "Sarah Zhang"
 date: '2022-09-07'
-output:
-  html_document: default
-  pdf_document: default
+output: html_document
 ---
 
 Notes: crude rate = death count / population * 100000
@@ -67,35 +65,6 @@ cvdAgeRegroup = transform(cvdAgeRegroup,
 ```
   
 ```{r}
-cvdAgeRegroup$month_code = as.character(cvdAgeRegroup$month_code)
+cvdAgeRegroup$month_code = toString(cvdAgeRegroup$month_code)
 ```
 
-c. Generate Modeling result
-```{r}
-age_season_model = lm(crude_rate ~ age_group*season, data = cvdAgeRegroup)
-summary(age_season_model)
-```
-**Analysis:**
-
-b. Add a time indicator by year (2018, 2019, 2020)
-```{r}
-cvdAgeRegroup = transform(cvdAgeRegroup, year_code = substr(month,6,7))
-```
-
-c. Generate modeling result
-```{r}
-age_year_model = lm(crude_rate ~ age_group*year_code, data = cvdAgeRegroup)
-summary(age_year_model)
-```
-
-d. Build a full model with gender and all time indicators 
-```{r}
-age_time_model = lm(crude_rate ~ age_group + covid + year_code + season + month_code , data = cvdAgeRegroup)
-summary(age_time_model)
-```
-
-
-```{r}
-age_time_step.both = step(age_time_model, direction='both')
-summary(age_time_step.both)
-```
