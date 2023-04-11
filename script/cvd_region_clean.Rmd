@@ -1,0 +1,37 @@
+---
+title: "cvd_region_clean"
+author: "Zhongyi Guo"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+We pulled data `Underlying Cause of Death, 1999-2020.txt` from
+https://wonder.cdc.gov/controller/datarequest/D76. We renamed it to 
+`cvd_region_raw.txt`.
+
+```{r}
+region <- read.delim("../data/cvd_region_raw.txt", header = TRUE)
+region <- region[region$Month.Code != '',]
+colnames(region) <- tolower(colnames(region))
+region <- subset(region, select = c("census.region","month.code","crude.rate","deaths","population"))
+colnames(region) <- c("region","month","crude_rate","death", "population")
+region
+```
+
+The `Census Region 1: ` in the `region` column is abundant, so we will remove 
+them.
+
+```{r}
+region$region <- gsub("Census Region \\d+:\\s", "", region$region)
+head(region)
+```
+
+The `region` is cleaned. We will export it to a new file named `cvd_region.csv`.
+
+```{r}
+write.csv(region, file = "../data/cvd_region.csv", row.names = FALSE)
+```
+
+
+
+
