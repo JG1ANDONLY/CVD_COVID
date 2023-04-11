@@ -1,0 +1,61 @@
+"Notes"	"Year"	"Year Code"	"Month"	"Month Code"	Deaths	Population	Crude Rate
+	"2018"	"2018"	"Jan., 2018"	"2018/01"	87912	Not Applicable	Not Applicable
+	"2018"	"2018"	"Feb., 2018"	"2018/02"	72061	Not Applicable	Not Applicable
+	"2018"	"2018"	"Mar., 2018"	"2018/03"	76612	Not Applicable	Not Applicable
+	"2018"	"2018"	"Apr., 2018"	"2018/04"	71535	Not Applicable	Not Applicable
+	"2018"	"2018"	"May, 2018"	"2018/05"	69984	Not Applicable	Not Applicable
+	"2018"	"2018"	"Jun., 2018"	"2018/06"	66519	Not Applicable	Not Applicable
+	"2018"	"2018"	"Jul., 2018"	"2018/07"	67677	Not Applicable	Not Applicable
+	"2018"	"2018"	"Aug., 2018"	"2018/08"	66910	Not Applicable	Not Applicable
+	"2018"	"2018"	"Sep., 2018"	"2018/09"	65025	Not Applicable	Not Applicable
+	"2018"	"2018"	"Oct., 2018"	"2018/10"	70680	Not Applicable	Not Applicable
+	"2018"	"2018"	"Nov., 2018"	"2018/11"	71837	Not Applicable	Not Applicable
+	"2018"	"2018"	"Dec., 2018"	"2018/12"	77082	Not Applicable	Not Applicable
+	"2019"	"2019"	"Jan., 2019"	"2019/01"	79765	Not Applicable	Not Applicable
+	"2019"	"2019"	"Feb., 2019"	"2019/02"	71977	Not Applicable	Not Applicable
+	"2019"	"2019"	"Mar., 2019"	"2019/03"	78643	Not Applicable	Not Applicable
+	"2019"	"2019"	"Apr., 2019"	"2019/04"	72270	Not Applicable	Not Applicable
+	"2019"	"2019"	"May, 2019"	"2019/05"	72343	Not Applicable	Not Applicable
+	"2019"	"2019"	"Jun., 2019"	"2019/06"	67984	Not Applicable	Not Applicable
+	"2019"	"2019"	"Jul., 2019"	"2019/07"	68996	Not Applicable	Not Applicable
+	"2019"	"2019"	"Aug., 2019"	"2019/08"	67910	Not Applicable	Not Applicable
+	"2019"	"2019"	"Sep., 2019"	"2019/09"	66560	Not Applicable	Not Applicable
+	"2019"	"2019"	"Oct., 2019"	"2019/10"	71501	Not Applicable	Not Applicable
+	"2019"	"2019"	"Nov., 2019"	"2019/11"	73059	Not Applicable	Not Applicable
+	"2019"	"2019"	"Dec., 2019"	"2019/12"	78875	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Jan., 2020 "	"2020/01"	80587	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Feb., 2020 "	"2020/02"	74686	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Mar., 2020 "	"2020/03"	79246	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Apr., 2020 "	"2020/04"	81543	Not Applicable	Not Applicable
+	"2020 "	"2020"	"May, 2020 "	"2020/05"	74495	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Jun., 2020 "	"2020/06"	70749	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Jul., 2020 "	"2020/07"	75401	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Aug., 2020 "	"2020/08"	74611	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Sep., 2020 "	"2020/09"	71721	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Oct., 2020 "	"2020/10"	75851	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Nov., 2020 "	"2020/11"	77524	Not Applicable	Not Applicable
+	"2020 "	"2020"	"Dec., 2020 "	"2020/12"	86823	Not Applicable	Not Applicable
+"---"
+"Dataset: Underlying Cause of Death, 1999-2020"
+"Query Parameters:"
+"ICD-10 113 Cause List: Major cardiovascular diseases (I00-I78)"
+"Year/Month: 2018; 2019; 2020"
+"Group By: Year; Month"
+"Show Totals: False"
+"Show Zero Values: False"
+"Show Suppressed: False"
+"Calculate Rates Per: 100,000"
+"Rate Options: Default intercensal populations for years 2001-2009 (except Infant Age Groups)"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/ucd.html for more information."
+"---"
+"Query Date: Apr 11, 2023 2:39:02 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Mortality 1999-2020 on CDC WONDER Online Database, released in 2021. Data are from the Multiple Cause of Death Files,"
+"1999-2020, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative"
+"Program. Accessed at http://wonder.cdc.gov/ucd-icd10.html on Apr 11, 2023 2:39:02 PM"
+"---"
+Caveats:
+"1. Population and rates are labeled 'Not Applicable' when Autopsy, Place of Death, Weekday or Month are grouped by or limited,"
+"due to lack of a valid population. More information: http://wonder.cdc.gov/wonder/help/ucd.html#NotApplicableRates."
