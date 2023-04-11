@@ -119,4 +119,3 @@ summary(age_model)
 cvd_age = read.csv('cvd_age_cleaned.csv')
 ```
 
-
