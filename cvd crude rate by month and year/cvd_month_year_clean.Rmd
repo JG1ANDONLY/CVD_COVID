@@ -1,0 +1,50 @@
+---
+title: "CVD_month_DC"
+author: "Sarah Zhang"
+date: "2023-04-11"
+output: html_document
+---
+```{r}
+library(ggplot2)
+```
+
+Clean the raw data: cvd by month
+```{r}
+df.month <- read.delim('month_raw.txt')
+df.month <- df.month[df.month$Month.Code != '',]
+df.month <- subset(df.month, select = c("Month.Code","Deaths"))
+colnames(df.month) <- c("month","death")
+head(df.month)
+```
+
+Merge Population
+```{r}
+pop_month <- read.csv("pop_month.csv")
+df.month <- merge(df.month, pop_month, by = "month")
+df.month <- subset(df.month, select = c("month","population", "death"))
+```
+```{r}
+df.month['crude_rate'] <- round(as.numeric(df.month$death)/as.numeric(df.month$population)*100000,2)
+```
+```{r}
+head(df.month)
+```
+Clean the raw data: cvd by year
+```{r}
+df.year <- read.delim('month_raw.txt')
+df.year <- df.year[df.year$Month.Code != '',]
+df.year <- subset(df.year, select = c("Year.Code","Deaths"))
+colnames(df.year) <- c("year","death")
+head(df.year)
+```
+Merge year with population
+```{r}
+pop_year <- read.csv("pop_year.csv")
+df.year <- merge(df.year, pop_year, by = "year")
+```
+
+```{r}
+ggplot(df, aes(df$month, df$crude_rate))
+```
+
+
