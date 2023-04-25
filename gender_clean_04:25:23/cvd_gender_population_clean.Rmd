@@ -1,0 +1,45 @@
+---
+title: "population_clean"
+author: "Jason Pan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("readxl")
+library("readxl")
+
+```
+
+```{r message=FALSE}
+df = read_excel("gender_pop_raw.xlsx")
+column = colnames(df)
+column[1] = "col 1"
+colnames(df) = column
+index = which(df$`col 1` == 'Total')
+df = df[3:index,]
+index = which(df[1,] == 2018)
+df = df[,index:ncol(df)]
+df
+mat = matrix(nrow = 3, ncol = 2)
+mat[1,1] = as.numeric(df[3,2])
+mat[1,2] = as.numeric(df[3,3])
+mat[2,1] = as.numeric(df[3,5])
+mat[2,2] = as.numeric(df[3,6])
+```
+
+```{r}
+df2 = read_excel("pop_sex_age_20.xlsx")
+column = colnames(df2)
+df2 = df2[5,]
+df2 = df2[,2:4]
+colnames(df2) = c("","Male","Female")
+mat[3,1] = as.numeric(df2[1,2])
+mat[3,2] = as.numeric(df2[1,3])
+df = as.data.frame(mat)
+colnames(df) = c("Male","Female")
+rownames(df) = c("2018","2019","2020")
+write.csv(df,"gender_pop_cleaned.csv")
+
+```

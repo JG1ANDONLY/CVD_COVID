@@ -1,0 +1,52 @@
+---
+title: "cvd_gender_clean"
+author: "Jason Pan"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Primitive cleaning and formatting
+```{r}
+df = read.delim("gender_raw.txt")
+head(df)
+# get rid of 'total' and other useless columns
+df = df[df$Gender.Code != '',]
+head(df)
+# subset and normalize column names
+df = subset(df, select = c("Month.Code","Gender.Code","Crude.Rate","Deaths","Population"))
+colnames(df) = c("month","gender","crude_rate","death","population")
+head(df)
+```
+
+Population dataset
+```{r}
+gender_pop = read.csv("gender_pop_cleaned.csv", header = T)
+gender_pop
+
+
+f_18 = df[grepl("2018",df$month) == T,][df$gender=="F",][1:12,]
+f_18$population = gender_pop[1,3]
+m_18 = df[grepl("2018",df$month) == T,][df$gender=="M",][1:12,]
+m_18$population = gender_pop[1,2]
+
+f_19 = df[grepl("2019",df$month) == T,][df$gender=="F",][1:12,]
+f_19$population = gender_pop[2,3]
+m_19 = df[grepl("2019",df$month) == T,][df$gender=="M",][1:12,]
+m_19$population = gender_pop[2,2]
+
+f_20 = df[grepl("2020",df$month) == T,][df$gender=="F",][1:12,]
+f_20$population = gender_pop[3,3]
+m_20 = df[grepl("2020",df$month) == T,][df$gender=="M",][1:12,]
+m_20$population = gender_pop[3,2]
+df = rbind(f_18,m_18,f_19,m_19,f_20,m_20)
+
+df["crude_rate"] = round(df$death/df$population*100000, digits = 7)
+df
+
+```
+
+
