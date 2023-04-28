@@ -1,0 +1,75 @@
+---
+title: "pop18-20_month"
+author: "Sarah Zhang"
+date: "2023-04-11"
+output: html_document
+---
+```{r}
+library("readxl")
+```
+
+Read and get resident population in 2018, 2019, and 2020 (before April)
+```{r}
+poppre4 <- read_excel("pop_month_pre_april20.xlsx")
+colnames(poppre4) <- poppre4[2, ]
+poppre4 <- subset(poppre4, select = c(1,2))
+colnames(poppre4) <- c("year","population")
+poppre4 <- poppre4[which(poppre4$year == '2018'):nrow(poppre4),]
+```
+
+Get population data by month for each year
+```{r}
+index = which(is.na(poppre4$population))
+pop18 = poppre4[(index[1]+1):(index[2]-1),2]
+pop19 = poppre4[(index[2]+1):(index[3]-1),2]
+pop20 = poppre4[(index[3]+1):(index[4]-1),2]
+```
+```{r}
+month18 = format(seq(as.Date("2018-01-01"), 
+                     as.Date("2018-12-01"), by = "month"), "%Y/%m")
+month19 = format(seq(as.Date("2019-01-01"), 
+                     as.Date("2019-12-01"), by = "month"), "%Y/%m")
+month20 = format(seq(as.Date("2020-01-01"), 
+                     as.Date("2020-12-01"), by = "month"), "%Y/%m")
+```
+```{r}
+pop18['month'] = month18
+pop19['month'] = month19
+pop20['month'] = month20
+```
+
+Read and get resident population in 2020 after April
+```{r}
+poppost4 <- read_excel("pop_month_post_april20.xlsx")
+colnames(poppost4) <- poppost4[2, ]
+poppost4 <- subset(poppost4, select = c(1,2))
+colnames(poppost4) <- c("year","population")
+pop20p4 <- poppre4[which(poppost4$year == '2020'):(which(poppost4$year == '2020')+8),2]
+```
+
+Merge population in 2020 from the two raw data sets
+```{r}
+month20p4 = format(seq(as.Date("2020-04-01"), 
+                     as.Date("2020-12-01"), by = "month"), "%Y/%m")
+
+pop20p4['month'] = month20p4
+pop20 = rbind(pop20[1:3,],pop20p4)
+```
+
+Merge three year population by month 
+```{r}
+pop_month = rbind(pop18, pop19, pop20)
+```
+
+Clean population by year
+```{r}
+population <- c(sum(as.numeric(pop18$population)),
+                sum(as.numeric(pop19$population)),
+                sum(as.numeric(pop20$population)))
+year <- c(2018, 2019, 2020)
+pop_year <- cbind(population, year)
+```
+```{r}
+write.csv(pop_year, file = "pop_year.csv")
+```
+

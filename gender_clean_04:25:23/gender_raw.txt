@@ -1,0 +1,97 @@
+"Notes"	"Month"	"Month Code"	"Gender"	"Gender Code"	Deaths	Population	Crude Rate
+	"Jan., 2018"	"2018/01"	"Female"	"F"	42911	Not Applicable	Not Applicable
+	"Jan., 2018"	"2018/01"	"Male"	"M"	45001	Not Applicable	Not Applicable
+	"Feb., 2018"	"2018/02"	"Female"	"F"	35128	Not Applicable	Not Applicable
+	"Feb., 2018"	"2018/02"	"Male"	"M"	36933	Not Applicable	Not Applicable
+	"Mar., 2018"	"2018/03"	"Female"	"F"	37274	Not Applicable	Not Applicable
+	"Mar., 2018"	"2018/03"	"Male"	"M"	39338	Not Applicable	Not Applicable
+	"Apr., 2018"	"2018/04"	"Female"	"F"	34703	Not Applicable	Not Applicable
+	"Apr., 2018"	"2018/04"	"Male"	"M"	36832	Not Applicable	Not Applicable
+	"May, 2018"	"2018/05"	"Female"	"F"	33594	Not Applicable	Not Applicable
+	"May, 2018"	"2018/05"	"Male"	"M"	36390	Not Applicable	Not Applicable
+	"Jun., 2018"	"2018/06"	"Female"	"F"	31987	Not Applicable	Not Applicable
+	"Jun., 2018"	"2018/06"	"Male"	"M"	34532	Not Applicable	Not Applicable
+	"Jul., 2018"	"2018/07"	"Female"	"F"	32373	Not Applicable	Not Applicable
+	"Jul., 2018"	"2018/07"	"Male"	"M"	35304	Not Applicable	Not Applicable
+	"Aug., 2018"	"2018/08"	"Female"	"F"	32166	Not Applicable	Not Applicable
+	"Aug., 2018"	"2018/08"	"Male"	"M"	34744	Not Applicable	Not Applicable
+	"Sep., 2018"	"2018/09"	"Female"	"F"	31539	Not Applicable	Not Applicable
+	"Sep., 2018"	"2018/09"	"Male"	"M"	33486	Not Applicable	Not Applicable
+	"Oct., 2018"	"2018/10"	"Female"	"F"	34483	Not Applicable	Not Applicable
+	"Oct., 2018"	"2018/10"	"Male"	"M"	36197	Not Applicable	Not Applicable
+	"Nov., 2018"	"2018/11"	"Female"	"F"	34458	Not Applicable	Not Applicable
+	"Nov., 2018"	"2018/11"	"Male"	"M"	37379	Not Applicable	Not Applicable
+	"Dec., 2018"	"2018/12"	"Female"	"F"	37187	Not Applicable	Not Applicable
+	"Dec., 2018"	"2018/12"	"Male"	"M"	39895	Not Applicable	Not Applicable
+	"Jan., 2019"	"2019/01"	"Female"	"F"	38464	Not Applicable	Not Applicable
+	"Jan., 2019"	"2019/01"	"Male"	"M"	41301	Not Applicable	Not Applicable
+	"Feb., 2019"	"2019/02"	"Female"	"F"	34473	Not Applicable	Not Applicable
+	"Feb., 2019"	"2019/02"	"Male"	"M"	37504	Not Applicable	Not Applicable
+	"Mar., 2019"	"2019/03"	"Female"	"F"	37919	Not Applicable	Not Applicable
+	"Mar., 2019"	"2019/03"	"Male"	"M"	40724	Not Applicable	Not Applicable
+	"Apr., 2019"	"2019/04"	"Female"	"F"	34826	Not Applicable	Not Applicable
+	"Apr., 2019"	"2019/04"	"Male"	"M"	37444	Not Applicable	Not Applicable
+	"May, 2019"	"2019/05"	"Female"	"F"	34692	Not Applicable	Not Applicable
+	"May, 2019"	"2019/05"	"Male"	"M"	37651	Not Applicable	Not Applicable
+	"Jun., 2019"	"2019/06"	"Female"	"F"	32730	Not Applicable	Not Applicable
+	"Jun., 2019"	"2019/06"	"Male"	"M"	35254	Not Applicable	Not Applicable
+	"Jul., 2019"	"2019/07"	"Female"	"F"	33108	Not Applicable	Not Applicable
+	"Jul., 2019"	"2019/07"	"Male"	"M"	35888	Not Applicable	Not Applicable
+	"Aug., 2019"	"2019/08"	"Female"	"F"	32551	Not Applicable	Not Applicable
+	"Aug., 2019"	"2019/08"	"Male"	"M"	35359	Not Applicable	Not Applicable
+	"Sep., 2019"	"2019/09"	"Female"	"F"	32015	Not Applicable	Not Applicable
+	"Sep., 2019"	"2019/09"	"Male"	"M"	34545	Not Applicable	Not Applicable
+	"Oct., 2019"	"2019/10"	"Female"	"F"	34477	Not Applicable	Not Applicable
+	"Oct., 2019"	"2019/10"	"Male"	"M"	37024	Not Applicable	Not Applicable
+	"Nov., 2019"	"2019/11"	"Female"	"F"	35038	Not Applicable	Not Applicable
+	"Nov., 2019"	"2019/11"	"Male"	"M"	38021	Not Applicable	Not Applicable
+	"Dec., 2019"	"2019/12"	"Female"	"F"	38201	Not Applicable	Not Applicable
+	"Dec., 2019"	"2019/12"	"Male"	"M"	40674	Not Applicable	Not Applicable
+	"Jan., 2020 "	"2020/01"	"Female"	"F"	38897	Not Applicable	Not Applicable
+	"Jan., 2020 "	"2020/01"	"Male"	"M"	41690	Not Applicable	Not Applicable
+	"Feb., 2020 "	"2020/02"	"Female"	"F"	35767	Not Applicable	Not Applicable
+	"Feb., 2020 "	"2020/02"	"Male"	"M"	38919	Not Applicable	Not Applicable
+	"Mar., 2020 "	"2020/03"	"Female"	"F"	37810	Not Applicable	Not Applicable
+	"Mar., 2020 "	"2020/03"	"Male"	"M"	41436	Not Applicable	Not Applicable
+	"Apr., 2020 "	"2020/04"	"Female"	"F"	39252	Not Applicable	Not Applicable
+	"Apr., 2020 "	"2020/04"	"Male"	"M"	42291	Not Applicable	Not Applicable
+	"May, 2020 "	"2020/05"	"Female"	"F"	35438	Not Applicable	Not Applicable
+	"May, 2020 "	"2020/05"	"Male"	"M"	39057	Not Applicable	Not Applicable
+	"Jun., 2020 "	"2020/06"	"Female"	"F"	33349	Not Applicable	Not Applicable
+	"Jun., 2020 "	"2020/06"	"Male"	"M"	37400	Not Applicable	Not Applicable
+	"Jul., 2020 "	"2020/07"	"Female"	"F"	35650	Not Applicable	Not Applicable
+	"Jul., 2020 "	"2020/07"	"Male"	"M"	39751	Not Applicable	Not Applicable
+	"Aug., 2020 "	"2020/08"	"Female"	"F"	35487	Not Applicable	Not Applicable
+	"Aug., 2020 "	"2020/08"	"Male"	"M"	39124	Not Applicable	Not Applicable
+	"Sep., 2020 "	"2020/09"	"Female"	"F"	34078	Not Applicable	Not Applicable
+	"Sep., 2020 "	"2020/09"	"Male"	"M"	37643	Not Applicable	Not Applicable
+	"Oct., 2020 "	"2020/10"	"Female"	"F"	36062	Not Applicable	Not Applicable
+	"Oct., 2020 "	"2020/10"	"Male"	"M"	39789	Not Applicable	Not Applicable
+	"Nov., 2020 "	"2020/11"	"Female"	"F"	36575	Not Applicable	Not Applicable
+	"Nov., 2020 "	"2020/11"	"Male"	"M"	40949	Not Applicable	Not Applicable
+	"Dec., 2020 "	"2020/12"	"Female"	"F"	40581	Not Applicable	Not Applicable
+	"Dec., 2020 "	"2020/12"	"Male"	"M"	46242	Not Applicable	Not Applicable
+"---"
+"Dataset: Underlying Cause of Death, 1999-2020"
+"Query Parameters:"
+"ICD-10 113 Cause List: Major cardiovascular diseases (I00-I78)"
+"Year/Month: 2018; 2019; 2020"
+"Group By: Month; Gender"
+"Show Totals: False"
+"Show Zero Values: True"
+"Show Suppressed: True"
+"Calculate Rates Per: 100,000"
+"Rate Options: Default intercensal populations for years 2001-2009 (except Infant Age Groups)"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/ucd.html for more information."
+"---"
+"Query Date: Apr 11, 2023 2:49:46 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Mortality 1999-2020 on CDC WONDER Online Database, released in 2021. Data are from the Multiple Cause of Death Files,"
+"1999-2020, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative"
+"Program. Accessed at http://wonder.cdc.gov/ucd-icd10.html on Apr 11, 2023 2:49:46 PM"
+"---"
+Caveats:
+"1. Population and rates are labeled 'Not Applicable' when Autopsy, Place of Death, Weekday or Month are grouped by or limited,"
+"due to lack of a valid population. More information: http://wonder.cdc.gov/wonder/help/ucd.html#NotApplicableRates."
