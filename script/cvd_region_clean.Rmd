@@ -5,6 +5,10 @@ date: "`r Sys.Date()`"
 output: pdf_document
 ---
 
+```{r}
+library(readxl)
+```
+
 We pulled data `Underlying Cause of Death, 1999-2020.txt` from
 https://wonder.cdc.gov/controller/datarequest/D76. We renamed it to 
 `cvd_region_raw.txt`.
@@ -32,6 +36,39 @@ The `region` is cleaned. We will export it to a new file named `cvd_region.csv`.
 write.csv(region, file = "../data/cvd_region.csv", row.names = FALSE)
 ```
 
+Now we will add the population data to the dataset and calculate the crude rate.
 
+```{r}
+region <- read.csv("../data/cvd_region.csv")
+population <- read_excel("../raw_data/pop_state.xlsx", col_names = FALSE)
+```
 
+Now I need to extract all information needed:
 
+```{r}
+data.needed <- population[4:9, ]
+data.needed
+```
+
+```{r}
+data.needed.new <- data.needed[c(-1, -2), c(1, 12, 13, 15)]
+colnames(data.needed.new) <- c("region", "2018", "2019", "2020")
+data.needed.new
+```
+
+```{r}
+for (year in c("2018", "2019", "2020")) {
+    for (reg in c("Northeast", "Midwest", "South", "West")) {
+        year.index <- grep(year, region$month)
+        region.index <- grep(reg, region$region)
+        shared <- intersect(year.index, region.index)
+        region[shared, "population"] <- data.needed.new[data.needed.new$region == reg, year]
+    }
+}
+
+region$population <- as.integer(region$population)
+
+region$crude_rate <- 100000 * region$death / region$population
+
+write.csv(region, file = "../data/cvd_region_crude_rate.csv", row.names = FALSE)
+```
