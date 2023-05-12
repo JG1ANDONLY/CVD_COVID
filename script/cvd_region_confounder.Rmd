@@ -1,0 +1,230 @@
+---
+title: "cvd_region_confounder"
+author: "Zhongyi Guo"
+output: pdf_document
+---
+
+```{r}
+suppressWarnings(library(tidyverse))
+suppressWarnings(library(ggplot2))
+suppressWarnings(library(rstatix))
+```
+
+## Exploratory Data Analysis
+
+```{r}
+# load region data
+region <- read.csv("../data/cvd_region_crude_rate.csv")
+
+# create a boolean dummy column named `before_covid` to indicate if this row is 
+# before COVID. If yes, before_covid = 1; if no, before_covid = 0
+before_covid_index <- append(grep("2018", region$month), grep("2019", region$month))
+region$before_covid <- 0
+region$before_covid[before_covid_index] <- 1
+
+# report summary statistics of `crude_rate`
+region %>%
+  group_by(region) %>%
+  summarise(
+    count = n(),
+    mean = mean(crude_rate, na.rm = TRUE),
+    sd = sd(crude_rate, na.rm = TRUE),
+    median = median(crude_rate, na.rm = TRUE),
+    IQR = IQR(crude_rate, na.rm = TRUE)
+    )
+```
+
+```{r}
+ggplot(region, aes(x = region, y = crude_rate)) + geom_boxplot() +
+  labs(x = "region", y = "crude rate", title = "Boxplot of crude rate by region") +
+  theme_minimal()
+```
+
+The boxplot indicates some outliers in all regions. We will save them for now 
+and remove them later.
+
+```{r}
+region %>%
+  group_by(region) %>%
+  ggplot(aes(x=crude_rate)) + 
+  geom_histogram() + facet_wrap(~ region, nrow = 2, ncol =2)
+```
+
+## Normality test
+
+```{r}
+shapiro.test(region$crude_rate)
+```
+
+The p-value of the Shapiro normality test is 8.787 x 10^(-12), which indicates 
+that the crude rate of all regions is not normally distributed. Thus, for the 
+next step, we will detect and remove outliers of each region.
+
+## Outlier Removal
+
+First, we want to observe the mean of the crude rate in each region.
+
+```{r}
+region %>%
+ group_by(region) %>%
+  get_summary_stats(crude_rate,type = "mean_sd")
+```
+
+Second, we want to identify outliers and remove.
+
+```{r}
+region_outliers <- region %>%
+  group_by(region) %>%
+  identify_outliers(crude_rate)
+region_outliers
+```
+
+```{r}
+region <- region %>%
+  anti_join(region_outliers)
+```
+
+```{r}
+region %>%
+  group_by(region) %>%
+  shapiro_test(crude_rate)
+```
+
+The result shows that the crude rate of each region is not normally distributed.
+
+```{r}
+region %>%
+  levene_test(crude_rate ~ region)
+```
+
+The p-value of the Levene test is 0.4936763. It indicates that there is no enough 
+evidence to reject the null hypothesis that each region has equal variance.
+
+## ANOVA - Are the means of crude rate in each region different?
+
+```{r}
+anova_result <- region %>%
+  aov(crude_rate ~ region, data = .)
+summary(anova_result)
+```
+
+The ANOVA test of region returns a p-value that is smaller than <2 x 10^(-16), 
+very close to 0. We are confident to reject the null hypothesis of the ANOVA test.
+Thus, the differences in means of crude rate between the groups are statistically significant.
+
+```{r}
+ggplot(data = region)+
+  geom_boxplot( mapping = aes(x = region, y = crude_rate)) +
+  labs(x = "Pre/Post COVID", y = "Crude rates", title = "Crude Rates Pre- and Post- COVID")+ 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+## Pre- vs. Post-COVID
+
+In this section, we want to separate data into two groups: Pre- and Post-COVID. 
+We want to study if there is statistical significant evidence that indicates the
+means of crude rate in each region are different.
+
+### Northeast
+
+```{r}
+northeast <- region[region$region %in% "Northeast", ]
+head(northeast)
+```
+
+```{r}
+northeast %>%
+  get_summary_stats(crude_rate,type = "mean_sd")
+```
+
+```{r}
+northeast %>%
+  t_test(crude_rate ~ before_covid, alternative = "less") %>%
+  add_significance()
+```
+p-value of this test is 0.941, which fails to reject the null hypotheis. The 
+means of crude rate are different in the Northeastern region Pre- vs. Post-COVID.
+
+```{r}
+boxplot(crude_rate ~ before_covid, data = northeast, xlab = "Pre/Post COVID", 
+        ylab = "Crude Rate", main = "Crude Rates Pre- and Post- COVID in the Northeastern region")
+```
+
+### Midwest
+
+```{r}
+midwest <- region[region$region %in% "Midwest", ]
+head(midwest)
+```
+
+```{r}
+midwest %>%
+  get_summary_stats(crude_rate,type = "mean_sd")
+```
+
+```{r}
+midwest %>%
+  t_test(crude_rate ~ before_covid, alternative = "less") %>%
+  add_significance()
+```
+
+p-value of this test is 1, which fails to reject the null hypotheis. The 
+means of crude rate are different in the Midwestern region Pre- vs. Post-COVID.
+
+```{r}
+boxplot(crude_rate ~ before_covid, data = midwest, xlab = "Pre/Post COVID", 
+        ylab = "Crude Rate", main = "Crude Rates Pre- and Post- COVID in the Midwestern region")
+```
+
+### South
+
+```{r}
+south <- region[region$region %in% "South", ]
+head(south)
+```
+
+```{r}
+south %>%
+  get_summary_stats(crude_rate,type = "mean_sd")
+```
+
+```{r}
+south %>%
+  t_test(crude_rate ~ before_covid, alternative = "less") %>%
+  add_significance()
+```
+
+p-value of this test is 1, which fails to reject the null hypotheis. The 
+means of crude rate are different in the Southern region Pre- vs. Post-COVID.
+
+```{r}
+boxplot(crude_rate ~ before_covid, data = south, xlab = "Pre/Post COVID", 
+        ylab = "Crude Rate", main = "Crude Rates Pre- and Post- COVID in the Southern region")
+```
+
+### West
+
+```{r}
+west <- region[region$region %in% "West", ]
+head(west)
+```
+
+```{r}
+west %>%
+  get_summary_stats(crude_rate,type = "mean_sd")
+```
+
+```{r}
+west %>%
+  t_test(crude_rate ~ before_covid, alternative = "less") %>%
+  add_significance()
+```
+
+p-value of this test is 1, which fails to reject the null hypotheis. The 
+means of crude rate are different in the Southern region Pre- vs. Post-COVID.
+
+```{r}
+boxplot(crude_rate ~ before_covid, data = west, xlab = "Pre/Post COVID", 
+        ylab = "Crude Rate", main = "Crude Rates Pre- and Post- COVID in the Western region")
+```
