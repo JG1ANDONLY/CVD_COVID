@@ -259,7 +259,7 @@ midwest %>%
 ```
 
 ```{r}
-#| label: northeastern_pre_post_COVID_crude_rate_variance
+#| label: midwestern_pre_post_COVID_crude_rate_variance
 midwest %>%
   mutate(covid = recode(covid, "0" = "Pre-COVID", "1" = "Post-COVID")) %>%
   group_by(covid) %>%
